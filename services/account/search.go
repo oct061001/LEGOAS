@@ -21,7 +21,6 @@ func (s *AccountServiceServer) SearchAccounts(ctx context.Context, req *pb.Searc
 	officesColl := s.Mongo.Database("legoas").Collection("offices")
 	menusColl := s.Mongo.Database("legoas").Collection("menus")
 
-	// Build filter
 	filter := bson.M{}
 	if req.GetQuery() != "" {
 		filter["$or"] = []bson.M{

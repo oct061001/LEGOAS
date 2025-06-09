@@ -64,6 +64,7 @@ func pbAccessRightsToBSON(ars []*pb.AccessRight) []AccessRight {
 	for _, ar := range ars {
 		res = append(res, AccessRight{
 			MenuCode:  ar.GetMenuCode(),
+			MenuName:  ar.GetMenuName(),
 			CanCreate: ar.GetCanCreate(),
 			CanRead:   ar.GetCanRead(),
 			CanUpdate: ar.GetCanUpdate(),
@@ -78,6 +79,7 @@ func bsonAccessRightsToPB(ars []AccessRight) []*pb.AccessRight {
 	for _, ar := range ars {
 		res = append(res, &pb.AccessRight{
 			MenuCode:  ar.MenuCode,
+			MenuName:  ar.MenuName,
 			CanCreate: ar.CanCreate,
 			CanRead:   ar.CanRead,
 			CanUpdate: ar.CanUpdate,
