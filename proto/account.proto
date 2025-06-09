@@ -12,6 +12,18 @@ service AccountService {
   rpc SearchAccounts(SearchAccountsRequest) returns (SearchAccountsResponse);
 }
 
+service RoleService {
+  rpc SearchRoles(SearchRolesRequest) returns (SearchRolesResponse);
+}
+
+service OfficeService {
+  rpc SearchOffices(SearchOfficesRequest) returns (SearchOfficesResponse);
+}
+
+service MenuService {
+  rpc SearchMenus(SearchMenusRequest) returns (SearchMenusResponse);
+}
+
 message RegisterAccountRequest {
   string account_name = 1;
   string password = 2;
@@ -116,4 +128,33 @@ message SearchAccountsResponse {
   int32 total_count = 2;
   int32 page = 3;
   int32 page_size = 4;
+}
+
+message SearchRolesRequest {
+  string query = 1;
+}
+
+message SearchRolesResponse {
+  repeated Role roles = 1;
+}
+
+message SearchOfficesRequest {
+  string query = 1;
+}
+
+message SearchOfficesResponse {
+  repeated Office offices = 1;
+}
+
+message Menu {
+  string menu_code = 1;
+  string menu_name = 2;
+}
+
+message SearchMenusRequest {
+  string query = 1;
+}
+
+message SearchMenusResponse {
+  repeated Menu menus = 1;
 }

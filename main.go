@@ -6,8 +6,12 @@ import (
 	"net"
 	"time"
 
+	"legoas/legoas/proto"
 	pb "legoas/legoas/proto"
 	"legoas/services/account"
+	"legoas/services/menu"
+	"legoas/services/office"
+	"legoas/services/role"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -30,6 +34,18 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to listen: %v", err)
 	}
+
+	roleRepo := role.NewRoleRepository(db)
+	roleService := role.NewRoleServiceServer(roleRepo)
+	proto.RegisterRoleServiceServer(grpcServer, roleService)
+
+	officeRepo := office.NewOfficeRepository(db)
+	officeService := office.NewOfficeServiceServer(officeRepo)
+	proto.RegisterOfficeServiceServer(grpcServer, officeService)
+
+	menuRepo := menu.NewMenuRepository(db)
+	menuService := menu.NewMenuServiceServer(menuRepo)
+	proto.RegisterMenuServiceServer(grpcServer, menuService)
 
 	grpcServer := grpc.NewServer()
 	pb.RegisterAccountServiceServer(grpcServer, account.NewAccountServiceServer(mongoClient))
