@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v6.31.1
-// source: proto/account.proto
+// source: account.proto
 
 package proto
 
@@ -35,7 +35,7 @@ type RegisterAccountRequest struct {
 
 func (x *RegisterAccountRequest) Reset() {
 	*x = RegisterAccountRequest{}
-	mi := &file_proto_account_proto_msgTypes[0]
+	mi := &file_account_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -47,7 +47,7 @@ func (x *RegisterAccountRequest) String() string {
 func (*RegisterAccountRequest) ProtoMessage() {}
 
 func (x *RegisterAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[0]
+	mi := &file_account_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -60,7 +60,7 @@ func (x *RegisterAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterAccountRequest.ProtoReflect.Descriptor instead.
 func (*RegisterAccountRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{0}
+	return file_account_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *RegisterAccountRequest) GetAccountName() string {
@@ -114,7 +114,7 @@ type RegisterAccountResponse struct {
 
 func (x *RegisterAccountResponse) Reset() {
 	*x = RegisterAccountResponse{}
-	mi := &file_proto_account_proto_msgTypes[1]
+	mi := &file_account_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -126,7 +126,7 @@ func (x *RegisterAccountResponse) String() string {
 func (*RegisterAccountResponse) ProtoMessage() {}
 
 func (x *RegisterAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[1]
+	mi := &file_account_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -139,7 +139,7 @@ func (x *RegisterAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterAccountResponse.ProtoReflect.Descriptor instead.
 func (*RegisterAccountResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{1}
+	return file_account_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *RegisterAccountResponse) GetAccountId() string {
@@ -162,7 +162,7 @@ type UserInfo struct {
 
 func (x *UserInfo) Reset() {
 	*x = UserInfo{}
-	mi := &file_proto_account_proto_msgTypes[2]
+	mi := &file_account_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -174,7 +174,7 @@ func (x *UserInfo) String() string {
 func (*UserInfo) ProtoMessage() {}
 
 func (x *UserInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[2]
+	mi := &file_account_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -187,7 +187,7 @@ func (x *UserInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
 func (*UserInfo) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{2}
+	return file_account_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UserInfo) GetName() string {
@@ -228,17 +228,18 @@ func (x *UserInfo) GetOfficeCode() string {
 type AccessRight struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	MenuCode      string                 `protobuf:"bytes,1,opt,name=menu_code,json=menuCode,proto3" json:"menu_code,omitempty"`
-	CanCreate     bool                   `protobuf:"varint,2,opt,name=can_create,json=canCreate,proto3" json:"can_create,omitempty"`
-	CanRead       bool                   `protobuf:"varint,3,opt,name=can_read,json=canRead,proto3" json:"can_read,omitempty"`
-	CanUpdate     bool                   `protobuf:"varint,4,opt,name=can_update,json=canUpdate,proto3" json:"can_update,omitempty"`
-	CanDelete     bool                   `protobuf:"varint,5,opt,name=can_delete,json=canDelete,proto3" json:"can_delete,omitempty"`
+	MenuName      string                 `protobuf:"bytes,2,opt,name=menu_name,json=menuName,proto3" json:"menu_name,omitempty"`
+	CanCreate     bool                   `protobuf:"varint,3,opt,name=can_create,json=canCreate,proto3" json:"can_create,omitempty"`
+	CanRead       bool                   `protobuf:"varint,4,opt,name=can_read,json=canRead,proto3" json:"can_read,omitempty"`
+	CanUpdate     bool                   `protobuf:"varint,5,opt,name=can_update,json=canUpdate,proto3" json:"can_update,omitempty"`
+	CanDelete     bool                   `protobuf:"varint,6,opt,name=can_delete,json=canDelete,proto3" json:"can_delete,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *AccessRight) Reset() {
 	*x = AccessRight{}
-	mi := &file_proto_account_proto_msgTypes[3]
+	mi := &file_account_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -250,7 +251,7 @@ func (x *AccessRight) String() string {
 func (*AccessRight) ProtoMessage() {}
 
 func (x *AccessRight) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[3]
+	mi := &file_account_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -263,12 +264,19 @@ func (x *AccessRight) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccessRight.ProtoReflect.Descriptor instead.
 func (*AccessRight) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{3}
+	return file_account_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AccessRight) GetMenuCode() string {
 	if x != nil {
 		return x.MenuCode
+	}
+	return ""
+}
+
+func (x *AccessRight) GetMenuName() string {
+	if x != nil {
+		return x.MenuName
 	}
 	return ""
 }
@@ -301,6 +309,110 @@ func (x *AccessRight) GetCanDelete() bool {
 	return false
 }
 
+type Role struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RoleCode      string                 `protobuf:"bytes,1,opt,name=role_code,json=roleCode,proto3" json:"role_code,omitempty"`
+	RoleName      string                 `protobuf:"bytes,2,opt,name=role_name,json=roleName,proto3" json:"role_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Role) Reset() {
+	*x = Role{}
+	mi := &file_account_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Role) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Role) ProtoMessage() {}
+
+func (x *Role) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Role.ProtoReflect.Descriptor instead.
+func (*Role) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Role) GetRoleCode() string {
+	if x != nil {
+		return x.RoleCode
+	}
+	return ""
+}
+
+func (x *Role) GetRoleName() string {
+	if x != nil {
+		return x.RoleName
+	}
+	return ""
+}
+
+type Office struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	OfficeCode    string                 `protobuf:"bytes,1,opt,name=office_code,json=officeCode,proto3" json:"office_code,omitempty"`
+	OfficeName    string                 `protobuf:"bytes,2,opt,name=office_name,json=officeName,proto3" json:"office_name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Office) Reset() {
+	*x = Office{}
+	mi := &file_account_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Office) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Office) ProtoMessage() {}
+
+func (x *Office) ProtoReflect() protoreflect.Message {
+	mi := &file_account_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Office.ProtoReflect.Descriptor instead.
+func (*Office) Descriptor() ([]byte, []int) {
+	return file_account_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *Office) GetOfficeCode() string {
+	if x != nil {
+		return x.OfficeCode
+	}
+	return ""
+}
+
+func (x *Office) GetOfficeName() string {
+	if x != nil {
+		return x.OfficeName
+	}
+	return ""
+}
+
 type UpdateAccountRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccountId     string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -316,7 +428,7 @@ type UpdateAccountRequest struct {
 
 func (x *UpdateAccountRequest) Reset() {
 	*x = UpdateAccountRequest{}
-	mi := &file_proto_account_proto_msgTypes[4]
+	mi := &file_account_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -328,7 +440,7 @@ func (x *UpdateAccountRequest) String() string {
 func (*UpdateAccountRequest) ProtoMessage() {}
 
 func (x *UpdateAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[4]
+	mi := &file_account_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -341,7 +453,7 @@ func (x *UpdateAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAccountRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAccountRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{4}
+	return file_account_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateAccountRequest) GetAccountId() string {
@@ -403,7 +515,7 @@ type UpdateAccountResponse struct {
 
 func (x *UpdateAccountResponse) Reset() {
 	*x = UpdateAccountResponse{}
-	mi := &file_proto_account_proto_msgTypes[5]
+	mi := &file_account_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -415,7 +527,7 @@ func (x *UpdateAccountResponse) String() string {
 func (*UpdateAccountResponse) ProtoMessage() {}
 
 func (x *UpdateAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[5]
+	mi := &file_account_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -428,7 +540,7 @@ func (x *UpdateAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAccountResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAccountResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{5}
+	return file_account_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateAccountResponse) GetSuccess() bool {
@@ -454,7 +566,7 @@ type DeleteAccountRequest struct {
 
 func (x *DeleteAccountRequest) Reset() {
 	*x = DeleteAccountRequest{}
-	mi := &file_proto_account_proto_msgTypes[6]
+	mi := &file_account_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -466,7 +578,7 @@ func (x *DeleteAccountRequest) String() string {
 func (*DeleteAccountRequest) ProtoMessage() {}
 
 func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[6]
+	mi := &file_account_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -479,7 +591,7 @@ func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAccountRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{6}
+	return file_account_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteAccountRequest) GetAccountId() string {
@@ -498,7 +610,7 @@ type DeleteAccountResponse struct {
 
 func (x *DeleteAccountResponse) Reset() {
 	*x = DeleteAccountResponse{}
-	mi := &file_proto_account_proto_msgTypes[7]
+	mi := &file_account_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -510,7 +622,7 @@ func (x *DeleteAccountResponse) String() string {
 func (*DeleteAccountResponse) ProtoMessage() {}
 
 func (x *DeleteAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[7]
+	mi := &file_account_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -523,7 +635,7 @@ func (x *DeleteAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAccountResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{7}
+	return file_account_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *DeleteAccountResponse) GetSuccess() bool {
@@ -542,7 +654,7 @@ type GetAccountByIdRequest struct {
 
 func (x *GetAccountByIdRequest) Reset() {
 	*x = GetAccountByIdRequest{}
-	mi := &file_proto_account_proto_msgTypes[8]
+	mi := &file_account_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -554,7 +666,7 @@ func (x *GetAccountByIdRequest) String() string {
 func (*GetAccountByIdRequest) ProtoMessage() {}
 
 func (x *GetAccountByIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[8]
+	mi := &file_account_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -567,7 +679,7 @@ func (x *GetAccountByIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAccountByIdRequest.ProtoReflect.Descriptor instead.
 func (*GetAccountByIdRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{8}
+	return file_account_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetAccountByIdRequest) GetAccountId() string {
@@ -582,8 +694,8 @@ type GetAccountByIdResponse struct {
 	AccountId     string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	AccountName   string                 `protobuf:"bytes,2,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
 	UserInfo      *UserInfo              `protobuf:"bytes,3,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
-	RoleCodes     []string               `protobuf:"bytes,4,rep,name=role_codes,json=roleCodes,proto3" json:"role_codes,omitempty"`
-	OfficeCodes   []string               `protobuf:"bytes,5,rep,name=office_codes,json=officeCodes,proto3" json:"office_codes,omitempty"`
+	Roles         []*Role                `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`     //
+	Offices       []*Office              `protobuf:"bytes,5,rep,name=offices,proto3" json:"offices,omitempty"` //
 	AccessRights  []*AccessRight         `protobuf:"bytes,6,rep,name=access_rights,json=accessRights,proto3" json:"access_rights,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -592,7 +704,7 @@ type GetAccountByIdResponse struct {
 
 func (x *GetAccountByIdResponse) Reset() {
 	*x = GetAccountByIdResponse{}
-	mi := &file_proto_account_proto_msgTypes[9]
+	mi := &file_account_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -604,7 +716,7 @@ func (x *GetAccountByIdResponse) String() string {
 func (*GetAccountByIdResponse) ProtoMessage() {}
 
 func (x *GetAccountByIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[9]
+	mi := &file_account_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -617,7 +729,7 @@ func (x *GetAccountByIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAccountByIdResponse.ProtoReflect.Descriptor instead.
 func (*GetAccountByIdResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{9}
+	return file_account_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *GetAccountByIdResponse) GetAccountId() string {
@@ -641,16 +753,16 @@ func (x *GetAccountByIdResponse) GetUserInfo() *UserInfo {
 	return nil
 }
 
-func (x *GetAccountByIdResponse) GetRoleCodes() []string {
+func (x *GetAccountByIdResponse) GetRoles() []*Role {
 	if x != nil {
-		return x.RoleCodes
+		return x.Roles
 	}
 	return nil
 }
 
-func (x *GetAccountByIdResponse) GetOfficeCodes() []string {
+func (x *GetAccountByIdResponse) GetOffices() []*Office {
 	if x != nil {
-		return x.OfficeCodes
+		return x.Offices
 	}
 	return nil
 }
@@ -682,7 +794,7 @@ type SearchAccountsRequest struct {
 
 func (x *SearchAccountsRequest) Reset() {
 	*x = SearchAccountsRequest{}
-	mi := &file_proto_account_proto_msgTypes[10]
+	mi := &file_account_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -694,7 +806,7 @@ func (x *SearchAccountsRequest) String() string {
 func (*SearchAccountsRequest) ProtoMessage() {}
 
 func (x *SearchAccountsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[10]
+	mi := &file_account_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +819,7 @@ func (x *SearchAccountsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchAccountsRequest.ProtoReflect.Descriptor instead.
 func (*SearchAccountsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{10}
+	return file_account_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SearchAccountsRequest) GetQuery() string {
@@ -750,8 +862,8 @@ type AccountData struct {
 	AccountId     string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	AccountName   string                 `protobuf:"bytes,2,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
 	UserInfo      *UserInfo              `protobuf:"bytes,3,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
-	RoleCodes     []string               `protobuf:"bytes,4,rep,name=role_codes,json=roleCodes,proto3" json:"role_codes,omitempty"`
-	OfficeCodes   []string               `protobuf:"bytes,5,rep,name=office_codes,json=officeCodes,proto3" json:"office_codes,omitempty"`
+	Roles         []*Role                `protobuf:"bytes,4,rep,name=roles,proto3" json:"roles,omitempty"`
+	Offices       []*Office              `protobuf:"bytes,5,rep,name=offices,proto3" json:"offices,omitempty"`
 	AccessRights  []*AccessRight         `protobuf:"bytes,6,rep,name=access_rights,json=accessRights,proto3" json:"access_rights,omitempty"`
 	CreatedAt     string                 `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -760,7 +872,7 @@ type AccountData struct {
 
 func (x *AccountData) Reset() {
 	*x = AccountData{}
-	mi := &file_proto_account_proto_msgTypes[11]
+	mi := &file_account_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -772,7 +884,7 @@ func (x *AccountData) String() string {
 func (*AccountData) ProtoMessage() {}
 
 func (x *AccountData) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[11]
+	mi := &file_account_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -785,7 +897,7 @@ func (x *AccountData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountData.ProtoReflect.Descriptor instead.
 func (*AccountData) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{11}
+	return file_account_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *AccountData) GetAccountId() string {
@@ -809,16 +921,16 @@ func (x *AccountData) GetUserInfo() *UserInfo {
 	return nil
 }
 
-func (x *AccountData) GetRoleCodes() []string {
+func (x *AccountData) GetRoles() []*Role {
 	if x != nil {
-		return x.RoleCodes
+		return x.Roles
 	}
 	return nil
 }
 
-func (x *AccountData) GetOfficeCodes() []string {
+func (x *AccountData) GetOffices() []*Office {
 	if x != nil {
-		return x.OfficeCodes
+		return x.Offices
 	}
 	return nil
 }
@@ -841,15 +953,15 @@ type SearchAccountsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Accounts      []*AccountData         `protobuf:"bytes,1,rep,name=accounts,proto3" json:"accounts,omitempty"`
 	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`                         // ← add this
-	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // ← add this
+	Page          int32                  `protobuf:"varint,3,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SearchAccountsResponse) Reset() {
 	*x = SearchAccountsResponse{}
-	mi := &file_proto_account_proto_msgTypes[12]
+	mi := &file_account_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -861,7 +973,7 @@ func (x *SearchAccountsResponse) String() string {
 func (*SearchAccountsResponse) ProtoMessage() {}
 
 func (x *SearchAccountsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[12]
+	mi := &file_account_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -874,7 +986,7 @@ func (x *SearchAccountsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchAccountsResponse.ProtoReflect.Descriptor instead.
 func (*SearchAccountsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{12}
+	return file_account_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *SearchAccountsResponse) GetAccounts() []*AccountData {
@@ -905,11 +1017,11 @@ func (x *SearchAccountsResponse) GetPageSize() int32 {
 	return 0
 }
 
-var File_proto_account_proto protoreflect.FileDescriptor
+var File_account_proto protoreflect.FileDescriptor
 
-const file_proto_account_proto_rawDesc = "" +
+const file_account_proto_rawDesc = "" +
 	"\n" +
-	"\x13proto/account.proto\x12\x05proto\"\x80\x02\n" +
+	"\raccount.proto\x12\x05proto\"\x80\x02\n" +
 	"\x16RegisterAccountRequest\x12!\n" +
 	"\faccount_name\x18\x01 \x01(\tR\vaccountName\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12,\n" +
@@ -928,16 +1040,25 @@ const file_proto_account_proto_rawDesc = "" +
 	"postalCode\x12\x1a\n" +
 	"\bprovince\x18\x04 \x01(\tR\bprovince\x12\x1f\n" +
 	"\voffice_code\x18\x05 \x01(\tR\n" +
-	"officeCode\"\xa2\x01\n" +
+	"officeCode\"\xbf\x01\n" +
 	"\vAccessRight\x12\x1b\n" +
-	"\tmenu_code\x18\x01 \x01(\tR\bmenuCode\x12\x1d\n" +
+	"\tmenu_code\x18\x01 \x01(\tR\bmenuCode\x12\x1b\n" +
+	"\tmenu_name\x18\x02 \x01(\tR\bmenuName\x12\x1d\n" +
 	"\n" +
-	"can_create\x18\x02 \x01(\bR\tcanCreate\x12\x19\n" +
-	"\bcan_read\x18\x03 \x01(\bR\acanRead\x12\x1d\n" +
+	"can_create\x18\x03 \x01(\bR\tcanCreate\x12\x19\n" +
+	"\bcan_read\x18\x04 \x01(\bR\acanRead\x12\x1d\n" +
 	"\n" +
-	"can_update\x18\x04 \x01(\bR\tcanUpdate\x12\x1d\n" +
+	"can_update\x18\x05 \x01(\bR\tcanUpdate\x12\x1d\n" +
 	"\n" +
-	"can_delete\x18\x05 \x01(\bR\tcanDelete\"\x9d\x02\n" +
+	"can_delete\x18\x06 \x01(\bR\tcanDelete\"@\n" +
+	"\x04Role\x12\x1b\n" +
+	"\trole_code\x18\x01 \x01(\tR\broleCode\x12\x1b\n" +
+	"\trole_name\x18\x02 \x01(\tR\broleName\"J\n" +
+	"\x06Office\x12\x1f\n" +
+	"\voffice_code\x18\x01 \x01(\tR\n" +
+	"officeCode\x12\x1f\n" +
+	"\voffice_name\x18\x02 \x01(\tR\n" +
+	"officeName\"\x9d\x02\n" +
 	"\x14UpdateAccountRequest\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12!\n" +
@@ -958,15 +1079,14 @@ const file_proto_account_proto_rawDesc = "" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\"6\n" +
 	"\x15GetAccountByIdRequest\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tR\taccountId\"\xa2\x02\n" +
+	"account_id\x18\x01 \x01(\tR\taccountId\"\xac\x02\n" +
 	"\x16GetAccountByIdResponse\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12!\n" +
 	"\faccount_name\x18\x02 \x01(\tR\vaccountName\x12,\n" +
-	"\tuser_info\x18\x03 \x01(\v2\x0f.proto.UserInfoR\buserInfo\x12\x1d\n" +
-	"\n" +
-	"role_codes\x18\x04 \x03(\tR\troleCodes\x12!\n" +
-	"\foffice_codes\x18\x05 \x03(\tR\vofficeCodes\x127\n" +
+	"\tuser_info\x18\x03 \x01(\v2\x0f.proto.UserInfoR\buserInfo\x12!\n" +
+	"\x05roles\x18\x04 \x03(\v2\v.proto.RoleR\x05roles\x12'\n" +
+	"\aoffices\x18\x05 \x03(\v2\r.proto.OfficeR\aoffices\x127\n" +
 	"\raccess_rights\x18\x06 \x03(\v2\x12.proto.AccessRightR\faccessRights\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\a \x01(\tR\tcreatedAt\"\x9c\x01\n" +
@@ -976,15 +1096,14 @@ const file_proto_account_proto_rawDesc = "" +
 	"\voffice_code\x18\x03 \x01(\tR\n" +
 	"officeCode\x12\x12\n" +
 	"\x04page\x18\x04 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\x97\x02\n" +
+	"\tpage_size\x18\x05 \x01(\x05R\bpageSize\"\xa1\x02\n" +
 	"\vAccountData\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12!\n" +
 	"\faccount_name\x18\x02 \x01(\tR\vaccountName\x12,\n" +
-	"\tuser_info\x18\x03 \x01(\v2\x0f.proto.UserInfoR\buserInfo\x12\x1d\n" +
-	"\n" +
-	"role_codes\x18\x04 \x03(\tR\troleCodes\x12!\n" +
-	"\foffice_codes\x18\x05 \x03(\tR\vofficeCodes\x127\n" +
+	"\tuser_info\x18\x03 \x01(\v2\x0f.proto.UserInfoR\buserInfo\x12!\n" +
+	"\x05roles\x18\x04 \x03(\v2\v.proto.RoleR\x05roles\x12'\n" +
+	"\aoffices\x18\x05 \x03(\v2\r.proto.OfficeR\aoffices\x127\n" +
 	"\raccess_rights\x18\x06 \x03(\v2\x12.proto.AccessRightR\faccessRights\x12\x1d\n" +
 	"\n" +
 	"created_at\x18\a \x01(\tR\tcreatedAt\"\x9a\x01\n" +
@@ -1002,80 +1121,86 @@ const file_proto_account_proto_rawDesc = "" +
 	"\x0eSearchAccounts\x12\x1c.proto.SearchAccountsRequest\x1a\x1d.proto.SearchAccountsResponseB\x0eZ\flegoas/protob\x06proto3"
 
 var (
-	file_proto_account_proto_rawDescOnce sync.Once
-	file_proto_account_proto_rawDescData []byte
+	file_account_proto_rawDescOnce sync.Once
+	file_account_proto_rawDescData []byte
 )
 
-func file_proto_account_proto_rawDescGZIP() []byte {
-	file_proto_account_proto_rawDescOnce.Do(func() {
-		file_proto_account_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_account_proto_rawDesc), len(file_proto_account_proto_rawDesc)))
+func file_account_proto_rawDescGZIP() []byte {
+	file_account_proto_rawDescOnce.Do(func() {
+		file_account_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_account_proto_rawDesc), len(file_account_proto_rawDesc)))
 	})
-	return file_proto_account_proto_rawDescData
+	return file_account_proto_rawDescData
 }
 
-var file_proto_account_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
-var file_proto_account_proto_goTypes = []any{
+var file_account_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_account_proto_goTypes = []any{
 	(*RegisterAccountRequest)(nil),  // 0: proto.RegisterAccountRequest
 	(*RegisterAccountResponse)(nil), // 1: proto.RegisterAccountResponse
 	(*UserInfo)(nil),                // 2: proto.UserInfo
 	(*AccessRight)(nil),             // 3: proto.AccessRight
-	(*UpdateAccountRequest)(nil),    // 4: proto.UpdateAccountRequest
-	(*UpdateAccountResponse)(nil),   // 5: proto.UpdateAccountResponse
-	(*DeleteAccountRequest)(nil),    // 6: proto.DeleteAccountRequest
-	(*DeleteAccountResponse)(nil),   // 7: proto.DeleteAccountResponse
-	(*GetAccountByIdRequest)(nil),   // 8: proto.GetAccountByIdRequest
-	(*GetAccountByIdResponse)(nil),  // 9: proto.GetAccountByIdResponse
-	(*SearchAccountsRequest)(nil),   // 10: proto.SearchAccountsRequest
-	(*AccountData)(nil),             // 11: proto.AccountData
-	(*SearchAccountsResponse)(nil),  // 12: proto.SearchAccountsResponse
+	(*Role)(nil),                    // 4: proto.Role
+	(*Office)(nil),                  // 5: proto.Office
+	(*UpdateAccountRequest)(nil),    // 6: proto.UpdateAccountRequest
+	(*UpdateAccountResponse)(nil),   // 7: proto.UpdateAccountResponse
+	(*DeleteAccountRequest)(nil),    // 8: proto.DeleteAccountRequest
+	(*DeleteAccountResponse)(nil),   // 9: proto.DeleteAccountResponse
+	(*GetAccountByIdRequest)(nil),   // 10: proto.GetAccountByIdRequest
+	(*GetAccountByIdResponse)(nil),  // 11: proto.GetAccountByIdResponse
+	(*SearchAccountsRequest)(nil),   // 12: proto.SearchAccountsRequest
+	(*AccountData)(nil),             // 13: proto.AccountData
+	(*SearchAccountsResponse)(nil),  // 14: proto.SearchAccountsResponse
 }
-var file_proto_account_proto_depIdxs = []int32{
+var file_account_proto_depIdxs = []int32{
 	2,  // 0: proto.RegisterAccountRequest.user_info:type_name -> proto.UserInfo
 	3,  // 1: proto.RegisterAccountRequest.access_rights:type_name -> proto.AccessRight
 	2,  // 2: proto.UpdateAccountRequest.user_info:type_name -> proto.UserInfo
 	3,  // 3: proto.UpdateAccountRequest.access_rights:type_name -> proto.AccessRight
 	2,  // 4: proto.GetAccountByIdResponse.user_info:type_name -> proto.UserInfo
-	3,  // 5: proto.GetAccountByIdResponse.access_rights:type_name -> proto.AccessRight
-	2,  // 6: proto.AccountData.user_info:type_name -> proto.UserInfo
-	3,  // 7: proto.AccountData.access_rights:type_name -> proto.AccessRight
-	11, // 8: proto.SearchAccountsResponse.accounts:type_name -> proto.AccountData
-	0,  // 9: proto.AccountService.RegisterAccount:input_type -> proto.RegisterAccountRequest
-	4,  // 10: proto.AccountService.UpdateAccount:input_type -> proto.UpdateAccountRequest
-	6,  // 11: proto.AccountService.DeleteAccount:input_type -> proto.DeleteAccountRequest
-	8,  // 12: proto.AccountService.GetAccountById:input_type -> proto.GetAccountByIdRequest
-	10, // 13: proto.AccountService.SearchAccounts:input_type -> proto.SearchAccountsRequest
-	1,  // 14: proto.AccountService.RegisterAccount:output_type -> proto.RegisterAccountResponse
-	5,  // 15: proto.AccountService.UpdateAccount:output_type -> proto.UpdateAccountResponse
-	7,  // 16: proto.AccountService.DeleteAccount:output_type -> proto.DeleteAccountResponse
-	9,  // 17: proto.AccountService.GetAccountById:output_type -> proto.GetAccountByIdResponse
-	12, // 18: proto.AccountService.SearchAccounts:output_type -> proto.SearchAccountsResponse
-	14, // [14:19] is the sub-list for method output_type
-	9,  // [9:14] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	4,  // 5: proto.GetAccountByIdResponse.roles:type_name -> proto.Role
+	5,  // 6: proto.GetAccountByIdResponse.offices:type_name -> proto.Office
+	3,  // 7: proto.GetAccountByIdResponse.access_rights:type_name -> proto.AccessRight
+	2,  // 8: proto.AccountData.user_info:type_name -> proto.UserInfo
+	4,  // 9: proto.AccountData.roles:type_name -> proto.Role
+	5,  // 10: proto.AccountData.offices:type_name -> proto.Office
+	3,  // 11: proto.AccountData.access_rights:type_name -> proto.AccessRight
+	13, // 12: proto.SearchAccountsResponse.accounts:type_name -> proto.AccountData
+	0,  // 13: proto.AccountService.RegisterAccount:input_type -> proto.RegisterAccountRequest
+	6,  // 14: proto.AccountService.UpdateAccount:input_type -> proto.UpdateAccountRequest
+	8,  // 15: proto.AccountService.DeleteAccount:input_type -> proto.DeleteAccountRequest
+	10, // 16: proto.AccountService.GetAccountById:input_type -> proto.GetAccountByIdRequest
+	12, // 17: proto.AccountService.SearchAccounts:input_type -> proto.SearchAccountsRequest
+	1,  // 18: proto.AccountService.RegisterAccount:output_type -> proto.RegisterAccountResponse
+	7,  // 19: proto.AccountService.UpdateAccount:output_type -> proto.UpdateAccountResponse
+	9,  // 20: proto.AccountService.DeleteAccount:output_type -> proto.DeleteAccountResponse
+	11, // 21: proto.AccountService.GetAccountById:output_type -> proto.GetAccountByIdResponse
+	14, // 22: proto.AccountService.SearchAccounts:output_type -> proto.SearchAccountsResponse
+	18, // [18:23] is the sub-list for method output_type
+	13, // [13:18] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
-func init() { file_proto_account_proto_init() }
-func file_proto_account_proto_init() {
-	if File_proto_account_proto != nil {
+func init() { file_account_proto_init() }
+func file_account_proto_init() {
+	if File_account_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_account_proto_rawDesc), len(file_proto_account_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_account_proto_rawDesc), len(file_account_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   15,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_account_proto_goTypes,
-		DependencyIndexes: file_proto_account_proto_depIdxs,
-		MessageInfos:      file_proto_account_proto_msgTypes,
+		GoTypes:           file_account_proto_goTypes,
+		DependencyIndexes: file_account_proto_depIdxs,
+		MessageInfos:      file_account_proto_msgTypes,
 	}.Build()
-	File_proto_account_proto = out.File
-	file_proto_account_proto_goTypes = nil
-	file_proto_account_proto_depIdxs = nil
+	File_account_proto = out.File
+	file_account_proto_goTypes = nil
+	file_account_proto_depIdxs = nil
 }

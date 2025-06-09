@@ -18,6 +18,7 @@ type UserInfo struct {
 
 type AccessRight struct {
 	MenuCode  string `bson:"menu_code"`
+	MenuName  string `bson:"menu_name"`
 	CanCreate bool   `bson:"can_create"`
 	CanRead   bool   `bson:"can_read"`
 	CanUpdate bool   `bson:"can_update"`

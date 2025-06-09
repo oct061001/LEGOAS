@@ -9,13 +9,17 @@ import (
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 func (s *AccountServiceServer) SearchAccounts(ctx context.Context, req *pb.SearchAccountsRequest) (*pb.SearchAccountsResponse, error) {
-	collection := s.Mongo.Database("legoas").Collection("accounts")
+	accountsColl := s.Mongo.Database("legoas").Collection("accounts")
+	rolesColl := s.Mongo.Database("legoas").Collection("roles")
+	officesColl := s.Mongo.Database("legoas").Collection("offices")
+	menusColl := s.Mongo.Database("legoas").Collection("menus")
 
 	// Build filter
 	filter := bson.M{}
@@ -45,17 +49,18 @@ func (s *AccountServiceServer) SearchAccounts(ctx context.Context, req *pb.Searc
 
 	opts := options.Find().SetSkip(skip).SetLimit(int64(pageSize))
 
-	cursor, err := collection.Find(ctx, filter, opts)
+	cursor, err := accountsColl.Find(ctx, filter, opts)
 	if err != nil {
 		return nil, status.Errorf(codes.Internal, "Database find error: %v", err)
 	}
 	defer cursor.Close(ctx)
 
 	var results []*pb.AccountData
+
 	for cursor.Next(ctx) {
 		var doc bson.M
 		if err := cursor.Decode(&doc); err != nil {
-			log.Printf("Failed to decode document: %v", err)
+			log.Printf("Decode error: %v", err)
 			continue
 		}
 
@@ -64,14 +69,11 @@ func (s *AccountServiceServer) SearchAccounts(ctx context.Context, req *pb.Searc
 		if id, ok := doc["_id"].(primitive.ObjectID); ok {
 			account.AccountId = id.Hex()
 		}
-		if name, ok := doc["account_name"].(string); ok {
-			account.AccountName = name
-		}
+		account.AccountName = getString(doc, "account_name")
 		if createdAt, ok := doc["created_at"].(primitive.DateTime); ok {
 			account.CreatedAt = createdAt.Time().Format(time.RFC3339)
 		}
 
-		// Parse user_info
 		if ui, ok := doc["user_info"].(bson.M); ok {
 			account.UserInfo = &pb.UserInfo{
 				Name:       getString(ui, "name"),
@@ -82,45 +84,18 @@ func (s *AccountServiceServer) SearchAccounts(ctx context.Context, req *pb.Searc
 			}
 		}
 
-		// Parse role codes
-		if rc, ok := doc["role_codes"].(primitive.A); ok {
-			for _, r := range rc {
-				if role, ok := r.(string); ok {
-					account.RoleCodes = append(account.RoleCodes, role)
-				}
-			}
-		}
+		account.Roles = fetchRoles(ctx, rolesColl, getStringArray(doc, "role_codes"))
 
-		// Parse office codes
-		if oc, ok := doc["office_codes"].(primitive.A); ok {
-			for _, o := range oc {
-				if office, ok := o.(string); ok {
-					account.OfficeCodes = append(account.OfficeCodes, office)
-				}
-			}
-		}
+		account.Offices = fetchOffices(ctx, officesColl, getStringArray(doc, "office_codes"))
 
-		// Parse access rights
-		if ars, ok := doc["access_rights"].(primitive.A); ok {
-			for _, a := range ars {
-				if ar, ok := a.(bson.M); ok {
-					account.AccessRights = append(account.AccessRights, &pb.AccessRight{
-						MenuCode:  getString(ar, "menu_code"),
-						CanCreate: getBool(ar, "can_create"),
-						CanRead:   getBool(ar, "can_read"),
-						CanUpdate: getBool(ar, "can_update"),
-						CanDelete: getBool(ar, "can_delete"),
-					})
-				}
-			}
-		}
+		account.AccessRights = fetchAccessRights(ctx, menusColl, doc["access_rights"])
 
 		results = append(results, account)
 	}
 
-	total, err := collection.CountDocuments(ctx, filter)
+	total, err := accountsColl.CountDocuments(ctx, filter)
 	if err != nil {
-		return nil, status.Errorf(codes.Internal, "Failed to count documents: %v", err)
+		return nil, status.Errorf(codes.Internal, "Count error: %v", err)
 	}
 
 	return &pb.SearchAccountsResponse{
@@ -147,4 +122,84 @@ func getBool(m bson.M, key string) bool {
 		}
 	}
 	return false
+}
+
+func getStringArray(m bson.M, key string) []string {
+	arr := []string{}
+	if val, ok := m[key].(primitive.A); ok {
+		for _, v := range val {
+			if s, ok := v.(string); ok {
+				arr = append(arr, s)
+			}
+		}
+	}
+	return arr
+}
+
+func fetchRoles(ctx context.Context, coll *mongo.Collection, codes []string) []*pb.Role {
+	var roles []*pb.Role
+	cursor, err := coll.Find(ctx, bson.M{"role_code": bson.M{"$in": codes}})
+	if err != nil {
+		return roles
+	}
+	defer cursor.Close(ctx)
+
+	for cursor.Next(ctx) {
+		var doc bson.M
+		if err := cursor.Decode(&doc); err == nil {
+			roles = append(roles, &pb.Role{
+				RoleCode: getString(doc, "role_code"),
+				RoleName: getString(doc, "role_name"),
+			})
+		}
+	}
+	return roles
+}
+
+func fetchOffices(ctx context.Context, coll *mongo.Collection, codes []string) []*pb.Office {
+	var offices []*pb.Office
+	cursor, err := coll.Find(ctx, bson.M{"office_code": bson.M{"$in": codes}})
+	if err != nil {
+		return offices
+	}
+	defer cursor.Close(ctx)
+
+	for cursor.Next(ctx) {
+		var doc bson.M
+		if err := cursor.Decode(&doc); err == nil {
+			offices = append(offices, &pb.Office{
+				OfficeCode: getString(doc, "office_code"),
+				OfficeName: getString(doc, "office_name"),
+			})
+		}
+	}
+	return offices
+}
+
+func fetchAccessRights(ctx context.Context, menusColl *mongo.Collection, value interface{}) []*pb.AccessRight {
+	var accessRights []*pb.AccessRight
+	if ars, ok := value.(primitive.A); ok {
+		for _, a := range ars {
+			if ar, ok := a.(bson.M); ok {
+				menuCode := getString(ar, "menu_code")
+				menuName := ""
+
+				var menuDoc bson.M
+				err := menusColl.FindOne(ctx, bson.M{"menu_code": menuCode}).Decode(&menuDoc)
+				if err == nil {
+					menuName = getString(menuDoc, "menu_name")
+				}
+
+				accessRights = append(accessRights, &pb.AccessRight{
+					MenuCode:  menuCode,
+					MenuName:  menuName,
+					CanCreate: getBool(ar, "can_create"),
+					CanRead:   getBool(ar, "can_read"),
+					CanUpdate: getBool(ar, "can_update"),
+					CanDelete: getBool(ar, "can_delete"),
+				})
+			}
+		}
+	}
+	return accessRights
 }
