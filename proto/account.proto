@@ -13,16 +13,44 @@ service AccountService {
 message RegisterAccountRequest {
   string account_name = 1;
   string password = 2;
+
+  UserInfo user_info = 3;
+
+  repeated string role_codes = 4;
+
+  repeated string office_codes = 5;
+
+  repeated AccessRight access_rights = 6;
 }
 
 message RegisterAccountResponse {
   string account_id = 1;
 }
 
+message UserInfo {
+  string name = 1;
+  string address = 2;
+  string postal_code = 3;
+  string province = 4;
+  string office_code = 5; // user’s main office code
+}
+
+message AccessRight {
+  string menu_code = 1;
+  bool can_create = 2;
+  bool can_read = 3;
+  bool can_update = 4;
+  bool can_delete = 5;
+}
+
 message UpdateAccountRequest {
   string account_id = 1;
   string account_name = 2;
   string password = 3;
+  UserInfo user_info = 4;
+  repeated string role_codes = 5;
+  repeated string office_codes = 6;
+  repeated AccessRight access_rights = 7;
 }
 
 message UpdateAccountResponse {

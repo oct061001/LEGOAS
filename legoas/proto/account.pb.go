@@ -25,6 +25,10 @@ type RegisterAccountRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccountName   string                 `protobuf:"bytes,1,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
 	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	UserInfo      *UserInfo              `protobuf:"bytes,3,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
+	RoleCodes     []string               `protobuf:"bytes,4,rep,name=role_codes,json=roleCodes,proto3" json:"role_codes,omitempty"`
+	OfficeCodes   []string               `protobuf:"bytes,5,rep,name=office_codes,json=officeCodes,proto3" json:"office_codes,omitempty"`
+	AccessRights  []*AccessRight         `protobuf:"bytes,6,rep,name=access_rights,json=accessRights,proto3" json:"access_rights,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -73,6 +77,34 @@ func (x *RegisterAccountRequest) GetPassword() string {
 	return ""
 }
 
+func (x *RegisterAccountRequest) GetUserInfo() *UserInfo {
+	if x != nil {
+		return x.UserInfo
+	}
+	return nil
+}
+
+func (x *RegisterAccountRequest) GetRoleCodes() []string {
+	if x != nil {
+		return x.RoleCodes
+	}
+	return nil
+}
+
+func (x *RegisterAccountRequest) GetOfficeCodes() []string {
+	if x != nil {
+		return x.OfficeCodes
+	}
+	return nil
+}
+
+func (x *RegisterAccountRequest) GetAccessRights() []*AccessRight {
+	if x != nil {
+		return x.AccessRights
+	}
+	return nil
+}
+
 type RegisterAccountResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccountId     string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
@@ -117,18 +149,174 @@ func (x *RegisterAccountResponse) GetAccountId() string {
 	return ""
 }
 
+type UserInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Address       string                 `protobuf:"bytes,2,opt,name=address,proto3" json:"address,omitempty"`
+	PostalCode    string                 `protobuf:"bytes,3,opt,name=postal_code,json=postalCode,proto3" json:"postal_code,omitempty"`
+	Province      string                 `protobuf:"bytes,4,opt,name=province,proto3" json:"province,omitempty"`
+	OfficeCode    string                 `protobuf:"bytes,5,opt,name=office_code,json=officeCode,proto3" json:"office_code,omitempty"` // user’s main office code
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserInfo) Reset() {
+	*x = UserInfo{}
+	mi := &file_proto_account_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserInfo) ProtoMessage() {}
+
+func (x *UserInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_account_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserInfo.ProtoReflect.Descriptor instead.
+func (*UserInfo) Descriptor() ([]byte, []int) {
+	return file_proto_account_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *UserInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UserInfo) GetAddress() string {
+	if x != nil {
+		return x.Address
+	}
+	return ""
+}
+
+func (x *UserInfo) GetPostalCode() string {
+	if x != nil {
+		return x.PostalCode
+	}
+	return ""
+}
+
+func (x *UserInfo) GetProvince() string {
+	if x != nil {
+		return x.Province
+	}
+	return ""
+}
+
+func (x *UserInfo) GetOfficeCode() string {
+	if x != nil {
+		return x.OfficeCode
+	}
+	return ""
+}
+
+type AccessRight struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MenuCode      string                 `protobuf:"bytes,1,opt,name=menu_code,json=menuCode,proto3" json:"menu_code,omitempty"`
+	CanCreate     bool                   `protobuf:"varint,2,opt,name=can_create,json=canCreate,proto3" json:"can_create,omitempty"`
+	CanRead       bool                   `protobuf:"varint,3,opt,name=can_read,json=canRead,proto3" json:"can_read,omitempty"`
+	CanUpdate     bool                   `protobuf:"varint,4,opt,name=can_update,json=canUpdate,proto3" json:"can_update,omitempty"`
+	CanDelete     bool                   `protobuf:"varint,5,opt,name=can_delete,json=canDelete,proto3" json:"can_delete,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AccessRight) Reset() {
+	*x = AccessRight{}
+	mi := &file_proto_account_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AccessRight) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AccessRight) ProtoMessage() {}
+
+func (x *AccessRight) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_account_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AccessRight.ProtoReflect.Descriptor instead.
+func (*AccessRight) Descriptor() ([]byte, []int) {
+	return file_proto_account_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *AccessRight) GetMenuCode() string {
+	if x != nil {
+		return x.MenuCode
+	}
+	return ""
+}
+
+func (x *AccessRight) GetCanCreate() bool {
+	if x != nil {
+		return x.CanCreate
+	}
+	return false
+}
+
+func (x *AccessRight) GetCanRead() bool {
+	if x != nil {
+		return x.CanRead
+	}
+	return false
+}
+
+func (x *AccessRight) GetCanUpdate() bool {
+	if x != nil {
+		return x.CanUpdate
+	}
+	return false
+}
+
+func (x *AccessRight) GetCanDelete() bool {
+	if x != nil {
+		return x.CanDelete
+	}
+	return false
+}
+
 type UpdateAccountRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccountId     string                 `protobuf:"bytes,1,opt,name=account_id,json=accountId,proto3" json:"account_id,omitempty"`
 	AccountName   string                 `protobuf:"bytes,2,opt,name=account_name,json=accountName,proto3" json:"account_name,omitempty"`
 	Password      string                 `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	UserInfo      *UserInfo              `protobuf:"bytes,4,opt,name=user_info,json=userInfo,proto3" json:"user_info,omitempty"`
+	RoleCodes     []string               `protobuf:"bytes,5,rep,name=role_codes,json=roleCodes,proto3" json:"role_codes,omitempty"`
+	OfficeCodes   []string               `protobuf:"bytes,6,rep,name=office_codes,json=officeCodes,proto3" json:"office_codes,omitempty"`
+	AccessRights  []*AccessRight         `protobuf:"bytes,7,rep,name=access_rights,json=accessRights,proto3" json:"access_rights,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateAccountRequest) Reset() {
 	*x = UpdateAccountRequest{}
-	mi := &file_proto_account_proto_msgTypes[2]
+	mi := &file_proto_account_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -140,7 +328,7 @@ func (x *UpdateAccountRequest) String() string {
 func (*UpdateAccountRequest) ProtoMessage() {}
 
 func (x *UpdateAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[2]
+	mi := &file_proto_account_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -153,7 +341,7 @@ func (x *UpdateAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAccountRequest.ProtoReflect.Descriptor instead.
 func (*UpdateAccountRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{2}
+	return file_proto_account_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdateAccountRequest) GetAccountId() string {
@@ -177,6 +365,34 @@ func (x *UpdateAccountRequest) GetPassword() string {
 	return ""
 }
 
+func (x *UpdateAccountRequest) GetUserInfo() *UserInfo {
+	if x != nil {
+		return x.UserInfo
+	}
+	return nil
+}
+
+func (x *UpdateAccountRequest) GetRoleCodes() []string {
+	if x != nil {
+		return x.RoleCodes
+	}
+	return nil
+}
+
+func (x *UpdateAccountRequest) GetOfficeCodes() []string {
+	if x != nil {
+		return x.OfficeCodes
+	}
+	return nil
+}
+
+func (x *UpdateAccountRequest) GetAccessRights() []*AccessRight {
+	if x != nil {
+		return x.AccessRights
+	}
+	return nil
+}
+
 type UpdateAccountResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
@@ -187,7 +403,7 @@ type UpdateAccountResponse struct {
 
 func (x *UpdateAccountResponse) Reset() {
 	*x = UpdateAccountResponse{}
-	mi := &file_proto_account_proto_msgTypes[3]
+	mi := &file_proto_account_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -199,7 +415,7 @@ func (x *UpdateAccountResponse) String() string {
 func (*UpdateAccountResponse) ProtoMessage() {}
 
 func (x *UpdateAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[3]
+	mi := &file_proto_account_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -212,7 +428,7 @@ func (x *UpdateAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAccountResponse.ProtoReflect.Descriptor instead.
 func (*UpdateAccountResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{3}
+	return file_proto_account_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *UpdateAccountResponse) GetSuccess() bool {
@@ -238,7 +454,7 @@ type DeleteAccountRequest struct {
 
 func (x *DeleteAccountRequest) Reset() {
 	*x = DeleteAccountRequest{}
-	mi := &file_proto_account_proto_msgTypes[4]
+	mi := &file_proto_account_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -250,7 +466,7 @@ func (x *DeleteAccountRequest) String() string {
 func (*DeleteAccountRequest) ProtoMessage() {}
 
 func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[4]
+	mi := &file_proto_account_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -263,7 +479,7 @@ func (x *DeleteAccountRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAccountRequest) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{4}
+	return file_proto_account_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *DeleteAccountRequest) GetAccountId() string {
@@ -282,7 +498,7 @@ type DeleteAccountResponse struct {
 
 func (x *DeleteAccountResponse) Reset() {
 	*x = DeleteAccountResponse{}
-	mi := &file_proto_account_proto_msgTypes[5]
+	mi := &file_proto_account_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -294,7 +510,7 @@ func (x *DeleteAccountResponse) String() string {
 func (*DeleteAccountResponse) ProtoMessage() {}
 
 func (x *DeleteAccountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_account_proto_msgTypes[5]
+	mi := &file_proto_account_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -307,7 +523,7 @@ func (x *DeleteAccountResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAccountResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAccountResponse) Descriptor() ([]byte, []int) {
-	return file_proto_account_proto_rawDescGZIP(), []int{5}
+	return file_proto_account_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteAccountResponse) GetSuccess() bool {
@@ -321,18 +537,45 @@ var File_proto_account_proto protoreflect.FileDescriptor
 
 const file_proto_account_proto_rawDesc = "" +
 	"\n" +
-	"\x13proto/account.proto\x12\x05proto\"W\n" +
+	"\x13proto/account.proto\x12\x05proto\"\x80\x02\n" +
 	"\x16RegisterAccountRequest\x12!\n" +
 	"\faccount_name\x18\x01 \x01(\tR\vaccountName\x12\x1a\n" +
-	"\bpassword\x18\x02 \x01(\tR\bpassword\"8\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\x12,\n" +
+	"\tuser_info\x18\x03 \x01(\v2\x0f.proto.UserInfoR\buserInfo\x12\x1d\n" +
+	"\n" +
+	"role_codes\x18\x04 \x03(\tR\troleCodes\x12!\n" +
+	"\foffice_codes\x18\x05 \x03(\tR\vofficeCodes\x127\n" +
+	"\raccess_rights\x18\x06 \x03(\v2\x12.proto.AccessRightR\faccessRights\"8\n" +
 	"\x17RegisterAccountResponse\x12\x1d\n" +
 	"\n" +
-	"account_id\x18\x01 \x01(\tR\taccountId\"t\n" +
+	"account_id\x18\x01 \x01(\tR\taccountId\"\x96\x01\n" +
+	"\bUserInfo\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12\x18\n" +
+	"\aaddress\x18\x02 \x01(\tR\aaddress\x12\x1f\n" +
+	"\vpostal_code\x18\x03 \x01(\tR\n" +
+	"postalCode\x12\x1a\n" +
+	"\bprovince\x18\x04 \x01(\tR\bprovince\x12\x1f\n" +
+	"\voffice_code\x18\x05 \x01(\tR\n" +
+	"officeCode\"\xa2\x01\n" +
+	"\vAccessRight\x12\x1b\n" +
+	"\tmenu_code\x18\x01 \x01(\tR\bmenuCode\x12\x1d\n" +
+	"\n" +
+	"can_create\x18\x02 \x01(\bR\tcanCreate\x12\x19\n" +
+	"\bcan_read\x18\x03 \x01(\bR\acanRead\x12\x1d\n" +
+	"\n" +
+	"can_update\x18\x04 \x01(\bR\tcanUpdate\x12\x1d\n" +
+	"\n" +
+	"can_delete\x18\x05 \x01(\bR\tcanDelete\"\x9d\x02\n" +
 	"\x14UpdateAccountRequest\x12\x1d\n" +
 	"\n" +
 	"account_id\x18\x01 \x01(\tR\taccountId\x12!\n" +
 	"\faccount_name\x18\x02 \x01(\tR\vaccountName\x12\x1a\n" +
-	"\bpassword\x18\x03 \x01(\tR\bpassword\"K\n" +
+	"\bpassword\x18\x03 \x01(\tR\bpassword\x12,\n" +
+	"\tuser_info\x18\x04 \x01(\v2\x0f.proto.UserInfoR\buserInfo\x12\x1d\n" +
+	"\n" +
+	"role_codes\x18\x05 \x03(\tR\troleCodes\x12!\n" +
+	"\foffice_codes\x18\x06 \x03(\tR\vofficeCodes\x127\n" +
+	"\raccess_rights\x18\a \x03(\v2\x12.proto.AccessRightR\faccessRights\"K\n" +
 	"\x15UpdateAccountResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage\"5\n" +
@@ -358,27 +601,33 @@ func file_proto_account_proto_rawDescGZIP() []byte {
 	return file_proto_account_proto_rawDescData
 }
 
-var file_proto_account_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_proto_account_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_proto_account_proto_goTypes = []any{
 	(*RegisterAccountRequest)(nil),  // 0: proto.RegisterAccountRequest
 	(*RegisterAccountResponse)(nil), // 1: proto.RegisterAccountResponse
-	(*UpdateAccountRequest)(nil),    // 2: proto.UpdateAccountRequest
-	(*UpdateAccountResponse)(nil),   // 3: proto.UpdateAccountResponse
-	(*DeleteAccountRequest)(nil),    // 4: proto.DeleteAccountRequest
-	(*DeleteAccountResponse)(nil),   // 5: proto.DeleteAccountResponse
+	(*UserInfo)(nil),                // 2: proto.UserInfo
+	(*AccessRight)(nil),             // 3: proto.AccessRight
+	(*UpdateAccountRequest)(nil),    // 4: proto.UpdateAccountRequest
+	(*UpdateAccountResponse)(nil),   // 5: proto.UpdateAccountResponse
+	(*DeleteAccountRequest)(nil),    // 6: proto.DeleteAccountRequest
+	(*DeleteAccountResponse)(nil),   // 7: proto.DeleteAccountResponse
 }
 var file_proto_account_proto_depIdxs = []int32{
-	0, // 0: proto.AccountService.RegisterAccount:input_type -> proto.RegisterAccountRequest
-	2, // 1: proto.AccountService.UpdateAccount:input_type -> proto.UpdateAccountRequest
-	4, // 2: proto.AccountService.DeleteAccount:input_type -> proto.DeleteAccountRequest
-	1, // 3: proto.AccountService.RegisterAccount:output_type -> proto.RegisterAccountResponse
-	3, // 4: proto.AccountService.UpdateAccount:output_type -> proto.UpdateAccountResponse
-	5, // 5: proto.AccountService.DeleteAccount:output_type -> proto.DeleteAccountResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	2, // 0: proto.RegisterAccountRequest.user_info:type_name -> proto.UserInfo
+	3, // 1: proto.RegisterAccountRequest.access_rights:type_name -> proto.AccessRight
+	2, // 2: proto.UpdateAccountRequest.user_info:type_name -> proto.UserInfo
+	3, // 3: proto.UpdateAccountRequest.access_rights:type_name -> proto.AccessRight
+	0, // 4: proto.AccountService.RegisterAccount:input_type -> proto.RegisterAccountRequest
+	4, // 5: proto.AccountService.UpdateAccount:input_type -> proto.UpdateAccountRequest
+	6, // 6: proto.AccountService.DeleteAccount:input_type -> proto.DeleteAccountRequest
+	1, // 7: proto.AccountService.RegisterAccount:output_type -> proto.RegisterAccountResponse
+	5, // 8: proto.AccountService.UpdateAccount:output_type -> proto.UpdateAccountResponse
+	7, // 9: proto.AccountService.DeleteAccount:output_type -> proto.DeleteAccountResponse
+	7, // [7:10] is the sub-list for method output_type
+	4, // [4:7] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_proto_account_proto_init() }
@@ -392,7 +641,7 @@ func file_proto_account_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_account_proto_rawDesc), len(file_proto_account_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

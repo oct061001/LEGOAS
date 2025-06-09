@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	pb "legoas/proto"
+	pb "legoas/legoas/proto"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -35,13 +35,34 @@ func NewAccountServiceServer(mongoClient *mongo.Client) *AccountServiceServer {
 func (s *AccountServiceServer) RegisterAccount(ctx context.Context, req *pb.RegisterAccountRequest) (*pb.RegisterAccountResponse, error) {
 	collection := s.Mongo.Database("legoas").Collection("accounts")
 
-	account := Account{
-		AccountName: req.AccountName,
-		Password:    req.Password,
-		CreatedAt:   time.Now(),
+	accessRights := []bson.M{}
+	for _, ar := range req.GetAccessRights() {
+		accessRights = append(accessRights, bson.M{
+			"menu_code":  ar.GetMenuCode(),
+			"can_create": ar.GetCanCreate(),
+			"can_read":   ar.GetCanRead(),
+			"can_update": ar.GetCanUpdate(),
+			"can_delete": ar.GetCanDelete(),
+		})
 	}
 
-	result, err := collection.InsertOne(ctx, account)
+	accountDoc := bson.M{
+		"account_name": req.GetAccountName(),
+		"password":     req.GetPassword(),
+		"user_info": bson.M{
+			"name":        req.GetUserInfo().GetName(),
+			"address":     req.GetUserInfo().GetAddress(),
+			"postal_code": req.GetUserInfo().GetPostalCode(),
+			"province":    req.GetUserInfo().GetProvince(),
+			"office_code": req.GetUserInfo().GetOfficeCode(),
+		},
+		"role_codes":    req.GetRoleCodes(),
+		"office_codes":  req.GetOfficeCodes(),
+		"access_rights": accessRights,
+		"created_at":    time.Now(),
+	}
+
+	result, err := collection.InsertOne(ctx, accountDoc)
 	if err != nil {
 		log.Println("Failed to insert account:", err)
 		return nil, err
@@ -58,11 +79,48 @@ func (s *AccountServiceServer) UpdateAccount(ctx context.Context, req *pb.Update
 	collection := s.Mongo.Database("legoas").Collection("accounts")
 
 	update := bson.M{}
+
 	if req.GetAccountName() != "" {
 		update["account_name"] = req.GetAccountName()
 	}
 	if req.GetPassword() != "" {
 		update["password"] = req.GetPassword()
+	}
+
+	// Update user_info if provided
+	if ui := req.GetUserInfo(); ui != nil {
+		update["user_info"] = bson.M{
+			"name":        ui.GetName(),
+			"address":     ui.GetAddress(),
+			"postal_code": ui.GetPostalCode(),
+			"province":    ui.GetProvince(),
+			"office_code": ui.GetOfficeCode(),
+		}
+	}
+
+	// Update role_codes if any
+	if len(req.GetRoleCodes()) > 0 {
+		update["role_codes"] = req.GetRoleCodes()
+	}
+
+	// Update office_codes if any
+	if len(req.GetOfficeCodes()) > 0 {
+		update["office_codes"] = req.GetOfficeCodes()
+	}
+
+	// Update access_rights if any
+	if len(req.GetAccessRights()) > 0 {
+		accessRights := []bson.M{}
+		for _, ar := range req.GetAccessRights() {
+			accessRights = append(accessRights, bson.M{
+				"menu_code":  ar.GetMenuCode(),
+				"can_create": ar.GetCanCreate(),
+				"can_read":   ar.GetCanRead(),
+				"can_update": ar.GetCanUpdate(),
+				"can_delete": ar.GetCanDelete(),
+			})
+		}
+		update["access_rights"] = accessRights
 	}
 
 	if len(update) == 0 {

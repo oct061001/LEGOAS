@@ -6,7 +6,7 @@ import (
 	"net"
 	"time"
 
-	pb "legoas/proto"
+	pb "legoas/legoas/proto"
 	"legoas/services/account"
 
 	"go.mongodb.org/mongo-driver/mongo"
