@@ -9,6 +9,7 @@ service AccountService {
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse);
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
   rpc GetAccountById(GetAccountByIdRequest) returns (GetAccountByIdResponse);
+  rpc SearchAccounts(SearchAccountsRequest) returns (SearchAccountsResponse);
 }
 
 message RegisterAccountRequest {
@@ -33,7 +34,7 @@ message UserInfo {
   string address = 2;
   string postal_code = 3;
   string province = 4;
-  string office_code = 5; // user’s main office code
+  string office_code = 5;
 }
 
 message AccessRight {
@@ -78,5 +79,30 @@ message GetAccountByIdResponse {
   repeated string role_codes = 4;
   repeated string office_codes = 5;
   repeated AccessRight access_rights = 6;
-  string created_at = 7; // ISO timestamp or string
+  string created_at = 7;
+}
+
+message SearchAccountsRequest {
+  string query = 1;
+  string role_code = 2;
+  string office_code = 3;
+  int32 page = 4;
+  int32 page_size = 5;
+}
+
+message AccountData {
+  string account_id = 1;
+  string account_name = 2;
+  UserInfo user_info = 3;
+  repeated string role_codes = 4;
+  repeated string office_codes = 5;
+  repeated AccessRight access_rights = 6;
+  string created_at = 7;
+}
+
+message SearchAccountsResponse {
+  repeated AccountData accounts = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 page_size = 4;  
 }
