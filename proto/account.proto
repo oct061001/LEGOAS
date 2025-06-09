@@ -8,6 +8,7 @@ service AccountService {
   rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse);
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse);
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
+  rpc GetAccountById(GetAccountByIdRequest) returns (GetAccountByIdResponse);
 }
 
 message RegisterAccountRequest {
@@ -64,4 +65,18 @@ message DeleteAccountRequest {
 
 message DeleteAccountResponse {
   bool success = 1;
+}
+
+message GetAccountByIdRequest {
+  string account_id = 1;
+}
+
+message GetAccountByIdResponse {
+  string account_id = 1;
+  string account_name = 2;
+  UserInfo user_info = 3;
+  repeated string role_codes = 4;
+  repeated string office_codes = 5;
+  repeated AccessRight access_rights = 6;
+  string created_at = 7; // ISO timestamp or string
 }
