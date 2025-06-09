@@ -6,6 +6,7 @@ option go_package = "legoas/proto";
 
 service AccountService {
   rpc RegisterAccount(RegisterAccountRequest) returns (RegisterAccountResponse);
+  rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse);
 }
 
 message RegisterAccountRequest {
@@ -15,4 +16,15 @@ message RegisterAccountRequest {
 
 message RegisterAccountResponse {
   string account_id = 1;
+}
+
+message UpdateAccountRequest {
+  string account_id = 1;
+  string account_name = 2;
+  string password = 3;
+}
+
+message UpdateAccountResponse {
+  bool success = 1;
+  string message = 2;
 }
