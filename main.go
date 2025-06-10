@@ -6,7 +6,6 @@ import (
 	"net"
 	"time"
 
-	"legoas/legoas/proto"
 	pb "legoas/legoas/proto"
 	"legoas/services/account"
 	"legoas/services/menu"
@@ -40,15 +39,15 @@ func main() {
 
 	roleRepo := role.NewRoleRepository(db)
 	roleService := role.NewRoleServiceServer(roleRepo)
-	proto.RegisterRoleServiceServer(grpcServer, roleService)
+	pb.RegisterRoleServiceServer(grpcServer, roleService)
 
 	officeRepo := office.NewOfficeRepository(db)
 	officeService := office.NewOfficeServiceServer(officeRepo)
-	proto.RegisterOfficeServiceServer(grpcServer, officeService)
+	pb.RegisterOfficeServiceServer(grpcServer, officeService)
 
 	menuRepo := menu.NewMenuRepository(db)
 	menuService := menu.NewMenuServiceServer(menuRepo)
-	proto.RegisterMenuServiceServer(grpcServer, menuService)
+	pb.RegisterMenuServiceServer(grpcServer, menuService)
 
 	pb.RegisterAccountServiceServer(grpcServer, account.NewAccountServiceServer(mongoClient))
 
