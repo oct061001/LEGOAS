@@ -35,6 +35,9 @@ func main() {
 		log.Fatalf("Failed to listen: %v", err)
 	}
 
+	grpcServer := grpc.NewServer()
+	db := mongoClient.Database("legoas")
+
 	roleRepo := role.NewRoleRepository(db)
 	roleService := role.NewRoleServiceServer(roleRepo)
 	proto.RegisterRoleServiceServer(grpcServer, roleService)
@@ -47,7 +50,6 @@ func main() {
 	menuService := menu.NewMenuServiceServer(menuRepo)
 	proto.RegisterMenuServiceServer(grpcServer, menuService)
 
-	grpcServer := grpc.NewServer()
 	pb.RegisterAccountServiceServer(grpcServer, account.NewAccountServiceServer(mongoClient))
 
 	reflection.Register(grpcServer)

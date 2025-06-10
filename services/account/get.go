@@ -34,9 +34,31 @@ func (s *AccountServiceServer) GetAccountById(ctx context.Context, req *pb.GetAc
 		AccountId:    accountDoc.ID.Hex(),
 		AccountName:  accountDoc.AccountName,
 		UserInfo:     bsonUserInfoToPB(accountDoc.UserInfo),
-		RoleCodes:    accountDoc.RoleCodes,
-		OfficeCodes:  accountDoc.OfficeCodes,
+		Roles:        bsonRolesToPB(accountDoc.RoleCodes),
+		Offices:      bsonOfficesToPB(accountDoc.OfficeCodes),
 		AccessRights: bsonAccessRightsToPB(accountDoc.AccessRights),
 		CreatedAt:    accountDoc.CreatedAt.Format(time.RFC3339),
 	}, nil
+}
+
+func bsonRolesToPB(codes []string) []*pb.Role {
+	var roles []*pb.Role
+	for _, code := range codes {
+		roles = append(roles, &pb.Role{
+			RoleCode: code,
+			// RoleName can be filled from DB or omitted if not available
+		})
+	}
+	return roles
+}
+
+func bsonOfficesToPB(codes []string) []*pb.Office {
+	var offices []*pb.Office
+	for _, code := range codes {
+		offices = append(offices, &pb.Office{
+			OfficeCode: code,
+			// OfficeName can be filled from DB or omitted if not available
+		})
+	}
+	return offices
 }
